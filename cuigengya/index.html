@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猫猫糖催更页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f9f9f9;
+        }
+        /* 9:16 页面比例 */
+        .page {
+            width: 360px;
+            height: 640px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        /* 背景图（增加兜底颜色，避免图片加载失败白屏） */
+        .bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* 优先加载图片，加载失败显示粉色兜底 */
+            background: #f9a8d4 url('images/jiangyan.jpg') center/cover;
+            filter: brightness(0.85);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 0 0 12px #ff9, 0 0 20px #ff3366;
+            animation: shakeUpDown 1.2s infinite ease-in-out;
+        }
+        .line {
+            font-size: 20px;
+            margin: 10px 0;
+            text-shadow: 0 0 10px #fff, 0 0 15px #66ccff;
+        }
+        .line1 {
+            animation: shakeLeftRight 2s infinite ease-in-out;
+        }
+        .line2 {
+            animation: shakeLeftRight 2s infinite -1s ease-in-out;
+        }
+        .btns {
+            margin-top: 50px;
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+        }
+        .btn-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-new {
+            background: linear-gradient(90deg, #ff6b9d, #f9844a);
+        }
+        .btn-old {
+            background: linear-gradient(90deg, #43cea2, #185a9d);
+        }
+        .count-text {
+            font-size: 16px;
+            color: #fff;
+            text-shadow: 0 0 8px #000;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+        @keyframes shakeUpDown {
+            0%,100% { transform: translateY(0); }
+            25% { transform: translateY(-8px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(8px); }
+        }
+        @keyframes shakeLeftRight {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="title">✨ 猫猫糖快更新！</div>
+            <div class="line line1">再不更新就要长草啦~</div>
+            <div class="line line2">江晏正失望地看着你~</div>
+            <div class="btns">
+                <div class="btn-wrap">
+                    <button class="btn btn-new" onclick="countClick('new')">催更新文</button>
+                    <div class="count-text" id="new-count">点击次数：0</div>
+                </div>
+                <div class="btn-wrap">
+                    <button class="btn btn-old" onclick="countClick('old')">催更旧文</button>
+                    <div class="count-text" id="old-count">点击次数：0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let newCount = 0;
+        let oldCount = 0;
+        function countClick(type) {
+            if (type === 'new') {
+                newCount++;
+                document.getElementById('new-count').textContent = `点击次数：${newCount}`;
+            } else {
+                oldCount++;
+                document.getElementById('old-count').textContent = `点击次数：${oldCount}`;
+            }
+            event.target.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.target.style.transform = '';
+            }, 100);
+        }
+    </script>
+</body>
+</html>
